@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyAsyncTaskProgressBarSample</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="string_run_progressar">Run</string>
+</resources>
