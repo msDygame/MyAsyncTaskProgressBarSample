@@ -160,12 +160,12 @@ public class CustomLoadingBar extends View
             int startAngle = 180 - angle;
             // 掃過的角度
             int sweepAngle = 2 * angle;
-            Log.i(TAG, "mProgress = " + startProgress + " startAngle= " + startAngle + "  mArcRadius=" + mArcRadius);
+            if (startProgress!= 100 && startProgress!=0) Log.i(TAG, "mProgress = " + startProgress + " startAngle= " + startAngle + "  mArcRadius=" + mArcRadius);
             canvas.drawArc(mArcRectF, startAngle, sweepAngle, false, mOrangePaint);
         }
         else
         {
-            Log.i(TAG, "mProgress = " + startProgress + "mCurrentProgressPosition = " + mCurrentProgressPosition + "mArcRadius=" + mArcRadius);
+            if (startProgress!= 100 && startProgress!=0) Log.i(TAG, "mProgress = " + startProgress + "mCurrentProgressPosition = " + mCurrentProgressPosition + "mArcRadius=" + mArcRadius);
             // 1.繪製white RECT
             // 2.繪製Orange ARC
             // 3.繪製orange RECT

@@ -19,49 +19,49 @@ import android.view.View;
 public class CustomProgressBar extends View
 {
     /**
-     * µeµ§¹ï¶Hªº¤Ş¥Î
+     * ç•«ç­†å°è±¡çš„å¼•ç”¨
      */
     private Paint paint;
     /**
-     * ¶êÀôªºÃC¦â
+     * åœ“ç’°çš„é¡è‰²
      */
     private int roundColor;
     /**
-     * ¶êÀô¶i«×ªºÃC¦â
+     * åœ“ç’°é€²åº¦çš„é¡è‰²
      */
     private int roundProgressColor;
     /**
-     * ¤¤¶¡¶i«×¦Ê¤À¤ñªº¦r²Å¦êªºÃC¦â
+     * ä¸­é–“é€²åº¦ç™¾åˆ†æ¯”çš„å­—ç¬¦ä¸²çš„é¡è‰²
      */
     private int textColor;
     /**
-     * ¤¤¶¡¶i«×¦Ê¤À¤ñªº¦r²Å¦êªº¦rÅé
+     * ä¸­é–“é€²åº¦ç™¾åˆ†æ¯”çš„å­—ç¬¦ä¸²çš„å­—é«”
      */
     private float textSize;
     /**
-     * ¶êÀôªº¼e«×
+     * åœ“ç’°çš„å¯¬åº¦
      */
     private float roundWidth;
     /**
-     * ³Ì¤j¶i«×
+     * æœ€å¤§é€²åº¦
      */
     private int max;
     /**
-     * ¬O§_Åã¥Ü¤¤¶¡ªº¶i«×
+     * æ˜¯å¦é¡¯ç¤ºä¸­é–“çš„é€²åº¦
      */
     private boolean textIsDisplayable;
     /**
-     * ¶i«×ªº­·®æ¡A¹ê¤ß©ÎªÌªÅ¤ß
+     * é€²åº¦çš„é¢¨æ ¼ï¼Œå¯¦å¿ƒæˆ–è€…ç©ºå¿ƒ
      */
     /**
-     * ·í«e¶i«×
+     * ç•¶å‰é€²åº¦
      */
     private int startProgress;
     /**
-     * ¶i«×¶}©lªº¨¤«×¼Æ
+     * é€²åº¦é–‹å§‹çš„è§’åº¦æ•¸
      */
     private int startAngle;
-    //¶êÀô¤º³¡ªº¶ñ¥R¦â
+    //åœ“ç’°å…§éƒ¨çš„å¡«å……è‰²
     private int centreColor ;
     //
     private int style;
@@ -84,31 +84,31 @@ public class CustomProgressBar extends View
         paint = new Paint();
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundProgressBar);
 
-        //Àò¨ú¦Û©w¸qÄİ©Ê©MÀq»{­È¡A²Ä¤@­Ó°Ñ¼Æ¬O±q¥Î¤áÄİ©Ê¤¤±o¨ìªº³]¸m¡A¦pªG¥Î¤á¨S¦³³]¸m¡A¨º»ò´N¥ÎÀq»{ªºÄİ©Ê¡A§Y¡G²Ä¤G­Ó°Ñ¼Æ
-        //¶êÀôªºÃC¦â
+        //ç²å–è‡ªå®šç¾©å±¬æ€§å’Œé»˜èªå€¼ï¼Œç¬¬ä¸€å€‹åƒæ•¸æ˜¯å¾ç”¨æˆ¶å±¬æ€§ä¸­å¾—åˆ°çš„è¨­ç½®ï¼Œå¦‚æœç”¨æˆ¶æ²’æœ‰è¨­ç½®ï¼Œé‚£éº¼å°±ç”¨é»˜èªçš„å±¬æ€§ï¼Œå³ï¼šç¬¬äºŒå€‹åƒæ•¸
+        //åœ“ç’°çš„é¡è‰²
         roundColor = mTypedArray.getColor(R.styleable.RoundProgressBar_roundColor, Color.RED);
-        //¶êÀô¶i«×±øªºÃC¦â
+        //åœ“ç’°é€²åº¦æ¢çš„é¡è‰²
         roundProgressColor = mTypedArray.getColor(R.styleable.RoundProgressBar_roundProgressColor, Color.GREEN);
-        //¤å¦rªºÃC¦â
+        //æ–‡å­—çš„é¡è‰²
         textColor = mTypedArray.getColor(R.styleable.RoundProgressBar_textColor, 0xffff5f5f);
-        //¤å¦rªº¤j¤p
+        //æ–‡å­—çš„å¤§å°
         textSize = mTypedArray.getDimension(R.styleable.RoundProgressBar_textSize, 25);
-        //¶êÀôªº¼e«×
+        //åœ“ç’°çš„å¯¬åº¦
         roundWidth = mTypedArray.getDimension(R.styleable.RoundProgressBar_roundWidth, 10);
-        //³Ì¤j¶i«×
+        //æœ€å¤§é€²åº¦
         max = mTypedArray.getInteger(R.styleable.RoundProgressBar_max, 100);
-        //¬O§_Åã¥Ü¤¤¶¡ªº¶i«×
+        //æ˜¯å¦é¡¯ç¤ºä¸­é–“çš„é€²åº¦
         textIsDisplayable = mTypedArray.getBoolean(R.styleable.RoundProgressBar_textIsDisplayable, true);
-        //¶i«×ªº­·®æ¡A¹ê¤ß©ÎªÌªÅ¤ß
+        //é€²åº¦çš„é¢¨æ ¼ï¼Œå¯¦å¿ƒæˆ–è€…ç©ºå¿ƒ
         style = mTypedArray.getInt(R.styleable.RoundProgressBar_style, 0);
-        //¶i«×¶}©lªº¨¤«×¼Æ
+        //é€²åº¦é–‹å§‹çš„è§’åº¦æ•¸
         startAngle = mTypedArray.getInt(R.styleable.RoundProgressBar_startAngle, -90);
-        //¶ê¤ßªºÃC¦â
+        //åœ“å¿ƒçš„é¡è‰²
         centreColor = mTypedArray.getColor(R.styleable.RoundProgressBar_centreColor,  0xff00ffff);
-        //·í«e¶i«×
+        //ç•¶å‰é€²åº¦
         startProgress = mTypedArray.getInt(R.styleable.RoundProgressBar_startProgress, 0);
-        //¬O§_Åã¥Ü¤¤¶¡ªº¶i«×
-        //¦^¦¬¸ê·½
+        //æ˜¯å¦é¡¯ç¤ºä¸­é–“çš„é€²åº¦
+        //å›æ”¶è³‡æº
         mTypedArray.recycle();
     }
 
@@ -116,11 +116,11 @@ public class CustomProgressBar extends View
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-        int centre = getWidth()/2; //Àò¨ú¶ê¤ßªºx§¤¼Ğ
-        int radius = (int) (centre - roundWidth/2); //¶êÀôªº¥b®|
+        int centre = getWidth()/2; //ç²å–åœ“å¿ƒçš„xåæ¨™
+        int radius = (int) (centre - roundWidth/2); //åœ“ç’°çš„åŠå¾‘
         /**
-             * ¤ºÀô µe¤¤¤ßªºÃC¦â
-             */
+         * å…§ç’° ç•«ä¸­å¿ƒçš„é¡è‰²
+         */
         if (centreColor != 0)
         {
             paint.setAntiAlias(true);
@@ -129,59 +129,59 @@ public class CustomProgressBar extends View
             canvas.drawCircle(centre, centre, radius, paint);
         }
         /**
-             * µe³Ì¥~¼hªº¤j¶êÀô
-             */
-        paint.setColor(roundColor); //³]¸m¶êÀôªºÃC¦â
-        paint.setStyle(Paint.Style.STROKE); //³]¸mªÅ¤ß
-        paint.setStrokeWidth(roundWidth); //³]¸m¶êÀôªº¼e«×
-        paint.setAntiAlias(true);  //®ø°£¿÷¾¦
-        canvas.drawCircle(centre, centre, radius, paint); //µe¥X¶êÀô
+         * ç•«æœ€å¤–å±¤çš„å¤§åœ“ç’°
+         */
+        paint.setColor(roundColor); //è¨­ç½®åœ“ç’°çš„é¡è‰²
+        paint.setStyle(Paint.Style.STROKE); //è¨­ç½®ç©ºå¿ƒ
+        paint.setStrokeWidth(roundWidth); //è¨­ç½®åœ“ç’°çš„å¯¬åº¦
+        paint.setAntiAlias(true);  //æ¶ˆé™¤é‹¸é½’
+        canvas.drawCircle(centre, centre, radius, paint); //ç•«å‡ºåœ“ç’°
         Log.e("log", centre + "");
         /**
-             * µe¶i«×¦Ê¤À¤ñ
-             */
+         * ç•«é€²åº¦ç™¾åˆ†æ¯”
+         */
         paint.setStrokeWidth(0);
         paint.setColor(textColor);
         paint.setTextSize(textSize);
-        paint.setTypeface(Typeface.DEFAULT_BOLD); //³]¸m¦rÅé
-        int percent = (int)(((float)startProgress / (float)max) * 100);  //¤¤¶¡ªº¶i«×¦Ê¤À¤ñ¡A¥ıÂà´«¦¨float¦b¶i¦æ°£ªk¹Bºâ¡A¤£µM³£¬°0
-        float textWidth = paint.measureText(percent + "%");   //´ú¶q¦rÅé¼e«×¡A§Ú­Ì»İ­n®Ú¾Ú¦rÅéªº¼e«×³]¸m¦b¶êÀô¤¤¶¡
+        paint.setTypeface(Typeface.DEFAULT_BOLD); //è¨­ç½®å­—é«”
+        int percent = (int)(((float)startProgress / (float)max) * 100);  //ä¸­é–“çš„é€²åº¦ç™¾åˆ†æ¯”ï¼Œå…ˆè½‰æ›æˆfloatåœ¨é€²è¡Œé™¤æ³•é‹ç®—ï¼Œä¸ç„¶éƒ½ç‚º0
+        float textWidth = paint.measureText(percent + "%");   //æ¸¬é‡å­—é«”å¯¬åº¦ï¼Œæˆ‘å€‘éœ€è¦æ ¹æ“šå­—é«”çš„å¯¬åº¦è¨­ç½®åœ¨åœ“ç’°ä¸­é–“
 
-        if(textIsDisplayable && percent != 0 && style == STROKE)
+        if(textIsDisplayable && percent != 0 && style == STROKE && percent != 100)
         {
-            canvas.drawText(percent + "%", centre - textWidth / 2, centre + textSize/2, paint); //µe¥X¶i«×¦Ê¤À¤ñ
+            canvas.drawText(percent + "%", centre - textWidth / 2, centre + textSize/2, paint); //ç•«å‡ºé€²åº¦ç™¾åˆ†æ¯”
         }
 
         /**
-             * µe¶ê©· ¡Aµe¶êÀôªº¶i«×
-             */
-        //³]¸m¶i«×¬O¹ê¤ßÁÙ¬OªÅ¤ß
-        paint.setStrokeWidth(roundWidth); //³]¸m¶êÀôªº¼e«×
-        paint.setColor(roundProgressColor);  //³]¸m¶i«×ªºÃC¦â
-        RectF oval = new RectF(centre - radius, centre - radius, centre + radius, centre + radius);  //¥Î©ó©w¸qªº¶ê©·ªº§Îª¬©M¤j¤pªº¬É­­
+         * ç•«åœ“å¼§ ï¼Œç•«åœ“ç’°çš„é€²åº¦
+         */
+        //è¨­ç½®é€²åº¦æ˜¯å¯¦å¿ƒé‚„æ˜¯ç©ºå¿ƒ
+        paint.setStrokeWidth(roundWidth); //è¨­ç½®åœ“ç’°çš„å¯¬åº¦
+        paint.setColor(roundProgressColor);  //è¨­ç½®é€²åº¦çš„é¡è‰²
+        RectF oval = new RectF(centre - radius, centre - radius, centre + radius, centre + radius);  //ç”¨æ–¼å®šç¾©çš„åœ“å¼§çš„å½¢ç‹€å’Œå¤§å°çš„ç•Œé™
 
         switch (style)
         {
             case STROKE:
             {
                 paint.setStyle(Paint.Style.STROKE);
-                canvas.drawArc(oval, startAngle , 360 * startProgress / max, false, paint);  //®Ú¾Ú¶i«×µe¶ê©·
+                canvas.drawArc(oval, startAngle , 360 * startProgress / max, false, paint);  //æ ¹æ“šé€²åº¦ç•«åœ“å¼§
                 /**
-                        * ²Ä¤G­Ó°Ñ¼Æ¬O¶i«×¶}©lªº¨¤«×¡A-90ªí¥Ü±q12ÂI¤è¦V¶}©l¨«¶i«×¡A¦pªG¬O0ªí¥Ü±q¤TÂIÄÁ¤è¦V¨«¶i«×¡A¨Ì¦¸Ãş±À
-                        * public void drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)
-                        * oval :«ü©w¶ê©·ªº¥~½ü¹ø¯x§Î°Ï°ì¡C
-                        * startAngle: ¶ê©·°_©l¨¤«×¡A³æ¦ì¬°«×¡C
-                        * sweepAngle: ¶ê©·±½¹Lªº¨¤«×¡A¶¶®É°w¤è¦V¡A³æ¦ì¬°«×¡C
-                        * useCenter: ¦pªG¬°True®É¡A¦bÃ¸»s¶ê©·®É±N¶ê¤ß¥]¬A¦b¤º¡A³q±`¥Î¨ÓÃ¸»s®°§Î¡C
-                        * paint: Ã¸»s¶ê©·ªºµeªOÄİ©Ê¡A¦pÃC¦â¡A¬O§_¶ñ¥Rµ¥
-                        */
+                 * ç¬¬äºŒå€‹åƒæ•¸æ˜¯é€²åº¦é–‹å§‹çš„è§’åº¦ï¼Œ-90è¡¨ç¤ºå¾12é»æ–¹å‘é–‹å§‹èµ°é€²åº¦ï¼Œå¦‚æœæ˜¯0è¡¨ç¤ºå¾ä¸‰é»é˜æ–¹å‘èµ°é€²åº¦ï¼Œä¾æ¬¡é¡æ¨
+                 * public void drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)
+                 * oval :æŒ‡å®šåœ“å¼§çš„å¤–è¼ªå»“çŸ©å½¢å€åŸŸã€‚
+                 * startAngle: åœ“å¼§èµ·å§‹è§’åº¦ï¼Œå–®ä½ç‚ºåº¦ã€‚
+                 * sweepAngle: åœ“å¼§æƒéçš„è§’åº¦ï¼Œé †æ™‚é‡æ–¹å‘ï¼Œå–®ä½ç‚ºåº¦ã€‚
+                 * useCenter: å¦‚æœç‚ºTrueæ™‚ï¼Œåœ¨ç¹ªè£½åœ“å¼§æ™‚å°‡åœ“å¿ƒåŒ…æ‹¬åœ¨å…§ï¼Œé€šå¸¸ç”¨ä¾†ç¹ªè£½æ‰‡å½¢ã€‚
+                 * paint: ç¹ªè£½åœ“å¼§çš„ç•«æ¿å±¬æ€§ï¼Œå¦‚é¡è‰²ï¼Œæ˜¯å¦å¡«å……ç­‰
+                 */
                 break;
             }
             case FILL:
             {
                 paint.setStyle(Paint.Style.FILL_AND_STROKE);
                 if(startProgress !=0)
-                    canvas.drawArc(oval, startAngle , 360 * startProgress / max, true, paint);  //®Ú¾Ú¶i«×µe¶ê©·
+                    canvas.drawArc(oval, startAngle , 360 * startProgress / max, true, paint);  //æ ¹æ“šé€²åº¦ç•«åœ“å¼§
                 break;
             }
         }
@@ -193,7 +193,7 @@ public class CustomProgressBar extends View
     }
 
     /**
-     * ³]¸m¶i«×ªº³Ì¤j­È
+     * è¨­ç½®é€²åº¦çš„æœ€å¤§å€¼
      * @param max
      */
     public synchronized void setMax(int max)
@@ -206,7 +206,7 @@ public class CustomProgressBar extends View
     }
 
     /**
-     * Àò¨ú¶i«×.»İ­n¦P¨B
+     * ç²å–é€²åº¦.éœ€è¦åŒæ­¥
      * @return
      */
     public synchronized int getProgress()
@@ -215,8 +215,8 @@ public class CustomProgressBar extends View
     }
 
     /**
-     * ³]¸m¶i«×¡A¦¹¬°½uµ{¦w¥ş±±¥ó¡A¥Ñ©ó¦Ò¼{¦h½uªº°İÃD¡A»İ­n¦P¨B
-     * ¨ê·s¬É­±½Õ¥ÎpostInvalidate()¯à¦b«DUI½uµ{¨ê·s
+     * è¨­ç½®é€²åº¦ï¼Œæ­¤ç‚ºç·šç¨‹å®‰å…¨æ§ä»¶ï¼Œç”±æ–¼è€ƒæ…®å¤šç·šçš„å•é¡Œï¼Œéœ€è¦åŒæ­¥
+     * åˆ·æ–°ç•Œé¢èª¿ç”¨postInvalidate()èƒ½åœ¨éUIç·šç¨‹åˆ·æ–°
      * @param progress
      */
     public synchronized void setProgress(int progress)

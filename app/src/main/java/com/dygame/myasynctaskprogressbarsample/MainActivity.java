@@ -2,6 +2,7 @@ package com.dygame.myasynctaskprogressbarsample;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,13 +21,18 @@ import java.net.URL;
 
 public class MainActivity extends ActionBarActivity
 {
-    protected Button testButton ;
+    protected Button runButton ;
+    protected Button resetButton ;
     protected ProgressBar myProgressBar1;
     protected ProgressBar myProgressBar2;
-    protected CustomProgressBar myProgressBar3 ;
-    protected CustomLoadingBar myProgressBar4 ;
+    protected ProgressBar myProgressBar3;
+    protected CustomProgressBar myProgressBar11 ;
+    protected CustomLoadingBar myProgressBar12 ;
+    protected ProgressBar myProgressBar4;
+    protected ProgressBar myProgressBar5;
     protected ProgressDialog mDialog;
     protected ImageView ivFan ;
+    protected boolean isOnceDone = false ;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,8 +42,17 @@ public class MainActivity extends ActionBarActivity
         MyCrashHandler pCrashHandler = MyCrashHandler.getInstance();
         pCrashHandler.init(getApplicationContext());
         //find resource
-        testButton = (Button)findViewById(R.id.button1) ;
-        testButton.setOnClickListener(new View.OnClickListener()
+        runButton = (Button)findViewById(R.id.button1) ;
+        resetButton = (Button)findViewById(R.id.button2) ;
+        myProgressBar1 = (ProgressBar)findViewById(R.id.progressBar1) ;//normal progress bar
+        myProgressBar2 = (ProgressBar)findViewById(R.id.progressBar2) ;//normal progress bar, style="?android:attr/progressBarStyleHorizontal"
+        myProgressBar3 = (ProgressBar)findViewById(R.id.progressBar3) ;//customn progress bar , android:progressDrawable="@drawable/custom_progressbar"
+        myProgressBar11 = (CustomProgressBar)findViewById(R.id.progressBar11) ;//custom progress bar ,  extends View , onDraw , canvas.drawArcArc
+        myProgressBar12 = (CustomLoadingBar)findViewById(R.id.progressBar12) ;//custom progress bar , extends View , onDraw , canvas.drawArc , canvas.drawRect
+        myProgressBar4 = (ProgressBar)findViewById(R.id.progressBar4) ;//customn progress bar ,  android:progressDrawable="@drawable/custom_progressbar" , use secondaryProgress (fail@20150709)
+        myProgressBar5 = (ProgressBar)findViewById(R.id.progressBar5) ;//custom progress bar , 通過rotate旋轉一張圖片顯示 ,  <rotate ... />
+        ivFan = (ImageView) findViewById(R.id.ivFan_pic);
+        runButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -45,11 +60,26 @@ public class MainActivity extends ActionBarActivity
                 new DownloadFilesTask(MainActivity.this).execute();
             }
         });
-        myProgressBar1 = (ProgressBar)findViewById(R.id.progressBar1) ;
-        myProgressBar2 = (ProgressBar)findViewById(R.id.progressBar2) ;
-        myProgressBar3 = (CustomProgressBar)findViewById(R.id.progressBar3) ;
-        myProgressBar4 = (CustomLoadingBar)findViewById(R.id.progressBar4) ;
-        ivFan = (ImageView) findViewById(R.id.ivFan_pic);
+        resetButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                myProgressBar1.setProgress(0);
+                myProgressBar2.setProgress(0);
+                myProgressBar3.setProgress(0);
+                myProgressBar11.setProgress(0);
+                myProgressBar12.setProgress(0);
+                myProgressBar4.setProgress(0);
+                myProgressBar5.setProgress(0);
+            }
+        });
+        //
+ //       Drawable draw = getResources().getDrawable(R.drawable.custom_progressbar);
+//        Drawable draw2 = getResources().getDrawable(R.drawable.custom_progressbar2);
+        // set the drawable as progress drawable
+ //       myProgressBar3.setProgressDrawable(draw);
+ //       myProgressBar6.setProgressDrawable(draw2);
         //
         rotateAnimationFan();
     }
@@ -98,11 +128,14 @@ public class MainActivity extends ActionBarActivity
         @Override
         protected void onPreExecute()
         {
-            mDialog = new ProgressDialog(pContext);
-            mDialog.setMessage("Loading...");
-            mDialog.setCancelable(false);
-            mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mDialog.show();
+            if (isOnceDone == false)
+            {
+                mDialog = new ProgressDialog(pContext);
+                mDialog.setMessage("Loading...");
+                mDialog.setCancelable(false);
+                mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mDialog.show();
+            }
             super.onPreExecute();
         }
         //只要呼叫execute這個方法， 就開始使用它了。
@@ -128,18 +161,22 @@ public class MainActivity extends ActionBarActivity
         //此函數在doInBackground調用publishProgress時觸發，雖然調用時只有一個參數，但是這裡取到的是一個數組，所以要用progesss[0]來取值
         protected void onProgressUpdate(Integer... progress)
         {
-            mDialog.setProgress(progress[0]);
+            if (isOnceDone == false) mDialog.setProgress(progress[0]);
             myProgressBar1.setProgress(progress[0]);
             myProgressBar2.setProgress(progress[0]);
             myProgressBar3.setProgress(progress[0]);
+            myProgressBar11.setProgress(progress[0]);
+            myProgressBar12.setProgress(progress[0]);
             myProgressBar4.setProgress(progress[0]);
+            myProgressBar5.setProgress(progress[0]);
         }
         //此函數在doInBackground返回時觸發，result就是doInBackground執行後的返回值
         protected void onPostExecute(String result)
         {
             if (result.equals("Done"))
             {
-                mDialog.dismiss();
+                if (isOnceDone == false) mDialog.dismiss();
+                isOnceDone = true ;
             }
         }
     }
